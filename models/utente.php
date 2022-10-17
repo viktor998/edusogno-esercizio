@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../config.php';
 class Utente {
     public $nome;
     public $cognome;
@@ -27,19 +26,4 @@ class Utente {
         mysqli_close($mysql);
     }
 
-    public function login($loginEmail,$loginPassword)
-    {          
-        $query = "SELECT `email`, `password` FROM `utenti` WHERE `email` = '$loginEmail'";
-        $mysql = mysqli_connect("127.0.0.1","root","root","test-edusogno",'3306');
-        if ($mysql->connect_errno) {
-            error_log('Connection error: ' . $mysql->connect_error);
-        }        
-        $emailPasswordUser=mysqli_query($mysql,$query);
-        var_dump($emailPasswordUser);
-        die();
-        if($emailPasswordUser){
-
-        }
-        mysqli_close($mysql);
-    }
 }
