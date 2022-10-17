@@ -1,0 +1,153 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  /* Common */
+  body {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+  }
+  /* Utility */
+  
+  .container {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  
+  .pt-5 {
+    padding-top: 5rem;
+  }
+  
+  .message {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: lightgreen;
+  }
+  
+  .error-text {
+    color: red;
+    margin-top: -2rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Header */
+  
+  header {
+    padding: 2rem;
+    border-end-end-radius: 13px;
+    border-end-start-radius: 13px;
+    box-shadow: 0px 4px 18px -6px #0057ff;
+  }
+  
+  /* Main */
+  main {
+    background-image: url("../img/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: calc(100vh - 121px);
+  }
+  
+  /* Form */
+  .container-form {
+    background: #ffffff;
+    border: 1px solid #134077;
+    border-radius: 19px;
+    padding: 2.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .container{
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .row{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+    column-gap: 4rem;
+  }
+  .col{
+    flex: 1 1 auto;
+  }
+  .input label {
+    display: block;
+    color: #231f20;
+  }
+  
+  .input input {
+    margin-bottom: 2.5rem;
+    outline: none;
+    padding: 0.75rem 0;
+    border: none;
+    border-bottom: 1px solid #2d224c;
+    width: 100%;
+    font-size: 20px;
+  }
+  .actions button {
+    background: #0057ff;
+    border-radius: 11px;
+    font-size: 20px;
+    color: white;
+    width: 100%;
+    border-color: #0057ff;
+    padding: 1rem 0;
+    margin: 1rem 0;
+    cursor: pointer;
+  }
+  
+  .question-link {
+    text-align: center;
+    margin-top: 2rem;
+    text-decoration: underline;
+    color: #2d224c;
+  }
+  
+  /* Login */
+  
+  .login h1 {
+    text-align: center;
+    color: #134077;
+    font-size: 32px;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Register */
+  
+  .register h1 {
+    text-align: center;
+    color: #134077;
+    font-size: 32px;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* personale */
+  
+  .personale h1 {
+    text-align: center;
+    color: #134077;
+    font-size: 32px;
+    margin-bottom: 5rem;
+  }
+  
+  .bullet{
+    background: #ffffff;
+    border: 1px solid #134077;
+    border-radius: 19px;
+    padding: 2.5rem;
+  }
+  .bullet h2{
+    font-size: 32px;
+    margin-bottom: 1.5rem;
+  }
+  .bullet p{
+    font-size: 20px;
+    color: #CCCCCC;
+    margin-bottom: 1.5rem;
+  }
+  
