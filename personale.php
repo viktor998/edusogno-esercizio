@@ -1,18 +1,22 @@
 <?php
+session_start();
+if (!$_SESSION['isAuthorized']) {
+    include __DIR__ . '/not-authorized.php';
+    die();
+}
 include __DIR__ . '/controllers/utenteController.php';
-$response = UtenteController::events($_GET['email']);
+$response = UtenteController::events($_SESSION['email']);
 $userEvents = $response->fetch_all(MYSQLI_ASSOC);
-
 include __DIR__ . '/layout/header.php';
 ?>
 
 <main>
     <section class="personale pt-5">
-        <h1>Ciao <?= $_GET['nome']; ?> ecco i tuoi eventi</h1>
+        <h1>Ciao <?= $_SESSION['nome']; ?> ecco i tuoi eventi</h1>
         <div class="container">
             <div class="row">
                 <?php if (count($userEvents) > 0) : ?>
-                    <?php foreach ($userEvents as $event ) : ?>
+                    <?php foreach ($userEvents as $event) : ?>
                         <div class="col">
                             <div class="bullet">
                                 <h2><?= $event['nome_evento'] ?></h2>
@@ -31,10 +35,6 @@ include __DIR__ . '/layout/header.php';
                     </div>
                 <?php endif; ?>
             </div>
-
-
-
-
         </div>
     </section>
 </main>

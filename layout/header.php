@@ -11,7 +11,7 @@
 
 <body>
     <header>
-        <div class="container">
+        <div class="container-nav">
             <div class="logo">
                 <?php 
                 include __DIR__ . '/../partials/logo.php'

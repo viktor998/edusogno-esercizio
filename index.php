@@ -1,11 +1,15 @@
 <?php
+session_start();
+$_SESSION['isAuthorized'] = false;
 include __DIR__ . '/controllers/utenteController.php';
 if (isset($_POST['login'])) {
     $response = UtenteController::autorize($_POST['email'], $_POST['password']);
     if(is_object($response)){
-        header("Location: ./personale.php?email=$response->email&nome=$response->nome");
-    }
-    
+        $_SESSION['nome'] = $response->nome;
+        $_SESSION['email'] = $response->email;
+        $_SESSION['isAuthorized'] = true;        
+        header("Location: ./personale.php");
+    }    
 }
 include __DIR__ . '/layout/header.php';
 ?>
