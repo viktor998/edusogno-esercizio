@@ -1,25 +1,11 @@
 <?php
-include __DIR__ . '/models/utente.php';
+include __DIR__ . '/controllers/utenteController.php';
 if (isset($_POST['login'])) {
-    $checkEmail = $_POST['email'];
-    $query = "SELECT `email`, `password`,`nome` FROM `utenti` WHERE `email` = '$checkEmail'";
-    $mysql = mysqli_connect("127.0.0.1", "root", "root", "test-edusogno", '3306');
-    if ($mysql->connect_errno) {
-        error_log('Connection error: ' . $mysql->connect_error);
+    $response = UtenteController::autorize($_POST['email'], $_POST['password']);
+    if(is_object($response)){
+        header("Location: ./personale.php?email=$response->email&nome=$response->nome");
     }
-    $emailPasswordUser = mysqli_query($mysql, $query);
-
-    if (!$emailPasswordUser->num_rows <= 0) {
-        $dataUser = $emailPasswordUser->fetch_object();
-
-        if ($dataUser->password === $_POST['password']) {
-            header("Location: ./personale.php?email=$dataUser->email&nome=$dataUser->nome");
-        } else {
-            $errorPassword = 'Password sbagliata';
-        }
-    } else {
-        $errorEmail = 'Email errata';
-    }
+    
 }
 include __DIR__ . '/layout/header.php';
 ?>
@@ -32,18 +18,18 @@ include __DIR__ . '/layout/header.php';
                 <div class="input">
                     <label for="email">Inserisci l'e-mail</label>
                     <input type="mail" placeholder="name@example.com" id="email" name="email" value="<?= $_POST['email'] ?>">
-                    <?php if ($errorEmail) : ?>
+                    <?php if ($response === "Email errata") : ?>
                         <div class="error-text">
-                            <p><?= $errorEmail ?></p>
+                            <p><?= $response ?></p>
                         </div>
                     <?php endif; ?>
                 </div>
                 <div class="input">
                     <label for="password">Inserisci la password</label>
                     <input type="password" name="password" id="password" placeholder="Scrivila qui">
-                    <?php if ($errorPassword) : ?>
+                    <?php if ($response === 'Password sbagliata') : ?>
                         <div class="error-text">
-                            <p><?= $errorPassword ?></p>
+                            <p><?= $response ?></p>
                         </div>
                     <?php endif; ?>
                 </div>

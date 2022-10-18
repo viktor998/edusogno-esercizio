@@ -1,9 +1,7 @@
 <?php
-include __DIR__ . '/models/utente.php';
-if (isset($_POST['registrati'])) {
-    $utente = new Utente($_POST['nome'], $_POST['cognome'], $_POST['email'], $_POST['password']);
-    $utente->save();
-    $successfull = true;
+include __DIR__ . '/controllers/utenteController.php';
+if (isset($_POST['registrati'])) {       
+    $successfull = UtenteController::save($_POST);
 };
 include __DIR__ . '/layout/header.php';
 ?>

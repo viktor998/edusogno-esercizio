@@ -1,21 +1,14 @@
 <?php
-include __DIR__ . '/models/utente.php';
-$email = $_GET['email'];
-$query = "SELECT * FROM `eventi` WHERE `attendees` LIKE '%$email%'";
-$mysql = mysqli_connect("127.0.0.1", "root", "root", "test-edusogno", '3306');
-if ($mysql->connect_errno) {
-    error_log('Connection error: ' . $mysql->connect_error);
-}
-$response = mysqli_query($mysql, $query);
+include __DIR__ . '/controllers/utenteController.php';
+$response = UtenteController::events($_GET['email']);
 $userEvents = $response->fetch_all(MYSQLI_ASSOC);
-
 
 include __DIR__ . '/layout/header.php';
 ?>
 
 <main>
     <section class="personale pt-5">
-        <h1>Ciao <?= $_GET['email']; ?> ecco i tuoi eventi</h1>
+        <h1>Ciao <?= $_GET['nome']; ?> ecco i tuoi eventi</h1>
         <div class="container">
             <div class="row">
                 <?php if (count($userEvents) > 0) : ?>
