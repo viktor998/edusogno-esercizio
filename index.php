@@ -4,12 +4,12 @@ $_SESSION['isAuthorized'] = false;
 include __DIR__ . '/controllers/utenteController.php';
 if (isset($_POST['login'])) {
     $response = UtenteController::autorize($_POST['email'], $_POST['password']);
-    if(is_object($response)){
+    if (is_object($response)) {
         $_SESSION['nome'] = $response->nome;
         $_SESSION['email'] = $response->email;
-        $_SESSION['isAuthorized'] = true;        
+        $_SESSION['isAuthorized'] = true;
         header("Location: ./personale.php");
-    }    
+    }
 }
 include __DIR__ . '/layout/header.php';
 ?>
@@ -41,7 +41,10 @@ include __DIR__ . '/layout/header.php';
                     <button type="submit" name="login">ACCEDI</button>
                 </div>
             </form>
-            <p class="question-link">Non hai ancora un profilo? <a href="./registrati.php">Registrati</a></p>
+            <div class="question-link">
+                <p>Non ricordi la password? <a href="./recupera-password.php">Recuperala qui</a></p>
+                <p>Non hai ancora un profilo? <a href="./registrati.php">Registrati</a></p>
+            </div>
         </div>
     </section>
 </main>

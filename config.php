@@ -28,7 +28,7 @@ class MysqliService
         if ($typeQuery === 'SELECT') {
             $response = mysqli_query($mysql, $query);
             if (!$response->num_rows <= 0) {
-                mysqli_close($mysql);                
+                mysqli_close($mysql);
                 return $response;
             } else {
                 mysqli_close($mysql);
@@ -36,5 +36,26 @@ class MysqliService
             }
         }
         mysqli_close($mysql);
+    }
+}
+
+class EmailService
+{
+    private static $subject = 'Reset Password';
+    private static $headers = [
+        'From: webmaster@example.com',
+        'Reply-To: webmaster@example.com',
+        "X-Mailer: PHP/'phpversion()'",
+        'MIME-Version: 1.0',
+        'Content-type: text/html; charset=iso-8859-1'
+    ];
+
+
+    public static function sendEmail($to,$message)
+    {
+        $success = mail($to, self::$subject, $message, implode("\r\n", self::$headers));
+        if (!$success) {
+            exit(error_get_last()['message']);
+        }
     }
 }

@@ -107,6 +107,9 @@
     text-decoration: underline;
     color: #2d224c;
   }
+  .question-link p {
+    margin-bottom: 0.75rem;
+  }
   
   /* Login */
   
@@ -166,5 +169,12 @@
     font-size: 20px;
     color: #CCCCCC;
     margin-bottom: 1.5rem;
+  }
+  /* RECUPERO */
+  .recupero h1 {
+    text-align: center;
+    color: #134077;
+    font-size: 32px;
+    margin-bottom: 5rem;
   }
   
