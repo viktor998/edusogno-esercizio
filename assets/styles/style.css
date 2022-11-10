@@ -31,7 +31,9 @@ header .logo{
   top: 0px;
   background: #D9E5F3;
   background-image: url('../img/background.png');
-  background: cover;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .form_container h3{
   position: absolute;
@@ -73,7 +75,6 @@ header .logo{
   background: #0057FF;
   color: #ffffff;
   border-radius: 11px;
-  /* margin-bottom: 0px; */
   text-transform: uppercase;
   font-size: 20px;
   font-weight: 700;
@@ -104,4 +105,68 @@ header .logo{
   border-radius: 5px;
   font-size: 20px;
   padding: 10px;
+}
+
+.card-container{
+  position: relative;
+  width: 80%;
+  height: auto;
+  top: 250px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card{
+  position: relative;
+  width: 349px;
+  height: 220px;
+  padding: 25px;
+  margin: 10px;
+  background: #FFFFFF;
+  border: 1px solid #134077;
+  border-radius: 19px;
+}
+.card-title{
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  text-align: left;
+  color: #231F20;
+  margin: 15px 0 10px;
+}.card-date{
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  color: #CCCCCC;
+  margin: 15px 0;
+}
+.card-btn{
+  /* position: absolute; */
+  width: 289px;
+  height: 50px;
+  /* left: 196px; */
+  /* top: 449px; */
+  background: #0057FF;
+  border-radius: 11px;
+  background: #0057FF;
+  color: #ffffff;
+  border-radius: 11px;
+  cursor: pointer;
+}
+.card-btn p{
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 30px auto;
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 99.5%;
+  text-transform: uppercase;
+  text-align: center;
 }

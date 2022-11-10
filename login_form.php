@@ -1,4 +1,5 @@
 <?php
+
 @include 'config.php';
 
 session_start();
@@ -7,22 +8,23 @@ if(isset($_POST['submit'])){
   $email = mysqli_real_escape_string($conn, $_POST['email']);
   $password = md5($_POST['password']);
 
-  $result = "SELECT * FROM utenti WHERE email = 'email' && password = 'password' ";
+  $select = " SELECT * FROM utenti WHERE email = '$email' && password = '$password' ";  
 
   $result = mysqli_query($conn, $select);
 
-  if(mysqli_num_rows($result) == 0){
+  if(mysqli_num_rows($result) > 0){
 
-    $error[] = 'Email o password errate. Riprova!';
+    $row = mysqli_fetch_array($result);
 
-  }else{
-    
+    if($row['type_user'] == ''){
+      $error[] = 'Email o password non corrette. Riprova!';
+      
+    }else{
       $_SESSION['nome'] = $row['nome'];
       header('location:eventi.php');
-    };
-
+    }
+  }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -63,11 +65,6 @@ if(isset($_POST['submit'])){
     </form>
 
 
-
-
-
-
-
   </div>
 
 <!-- <script>
@@ -80,6 +77,5 @@ if(isset($_POST['submit'])){
       }
     }
 </script> -->
-
 </body>
 </html>
