@@ -5,7 +5,10 @@
   box-sizing: border-box;
   font-family: 'DM Sans, sans serif';
 }
-html, body{max-width: 1440px; max-height: 1024px;}
+html, body{
+  max-width: 1440px;
+  max-height: 1024px; 
+}
 header{
   position: absolute;
   width: 100vw;
@@ -85,6 +88,10 @@ header .logo{
   font-weight: 400;
   font-size: 20px;
 }
+.fa-solid{
+  margin-left: -30px;
+  cursor: pointer;
+}
 .form_container form p{
   text-align: center;
   font-size: 13px;
@@ -107,7 +114,7 @@ header .logo{
   padding: 10px;
 }
 
-.card-container{
+.card-group{
   position: relative;
   width: 80%;
   height: auto;
@@ -144,7 +151,7 @@ header .logo{
   margin: 15px 0;
 }
 .card-btn{
-  /* position: absolute; */
+  position: absolute;
   width: 289px;
   height: 50px;
   /* left: 196px; */
@@ -169,4 +176,24 @@ header .logo{
   line-height: 99.5%;
   text-transform: uppercase;
   text-align: center;
+}
+
+.container{
+  position: absolute;
+  margin: 300px auto;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid red;
+  z-index:100000;
+}
+.container-fluid{
+  position: absolute;
+  width: 100%;;
+  margin: 600px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid red;
+  z-index:100000;
 }
