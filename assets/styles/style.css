@@ -176,7 +176,7 @@ h2{
   position:relative;
 }
 
-form input[type="text"]:focus,form input[type="email"]:focus,form input[type="password"]:focus{
+/* form input[type="text"]:focus,form input[type="email"]:focus,form input[type="password"]:focus{
   padding: 5px 14px 7px;
   transition: 0.4s;
 }
@@ -184,7 +184,7 @@ form input[type="text"]:focus,form input[type="email"]:focus,form input[type="pa
 form input[type="text"] ~ .focus-border, form input[type="email"] ~ .focus-border,form input[type="password"] ~ .focus-border{
   position: absolute;
   height: 36px;
-  bottom: 0;
+  bottom: 11px;
   left: 0;
   width: 0;
   transition: 0.4s;
@@ -194,7 +194,7 @@ form input[type="text"]:focus ~ .focus-border, form input[type="email"]:focus ~ 
   width: 100%;
   transition: 0.4s;
   border: 2px solid var(--darkercane);
-}
+} */
 
 .form-container form label{
   font-size: 13px;
@@ -278,11 +278,15 @@ div.forgot-pw a:hover{
 i.fa-solid.fa-eye-slash{
   color:#666;
   position:absolute;
+  right: 5px;
+  top: 15px;
 }
 
 i.fa-solid.fa-eye{
   color:var(--electricblue);
   position:absolute;
+  right: 5px;
+  top: 15px;
 }
 
 

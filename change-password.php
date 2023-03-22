@@ -10,17 +10,21 @@ $usermail=$_POST['usermail'];
 $sql = "SELECT * FROM utenti WHERE email='$usermail' LIMIT 1";
 $result= mysqli_query($conn, $sql);
 
-if($confPw != $newPw){
-  $_SESSION['alert']="Le password devono coincidere";
-}else{
-  $query="UPDATE password FROM utenti SET password='$confPw' WHERE email='$usermail'";
-  $res= mysqli_query($conn, $query);
-  if($res && mysqli_num_rows($res)>0){
-    $_SESSION['alert']="Password aggiornata correttamente";
-    header("Location: login.php");
-    die();
-  }
+if(!$result){
+  $_SESSION['alert']="Questa e-mail non è presente nel nostro database";
 }
+// elseif(!empty($confPw) && !empty($newPw) && $confPw!= $newPw){
+//   $_SESSION['alert']="Le password devono coincidere";
+// }
+//else{
+//   $query="UPDATE password FROM utenti SET password='$confPw' WHERE email='$usermail'";
+//   $res= mysqli_query($conn, $query);
+//   if($res && mysqli_num_rows($res)>0){
+//     $_SESSION['alert']="Password aggiornata correttamente";
+//     header("Location: login.php");
+//     die();
+//   }
+// }
 
 // }
 // elseif(!$result || mysqli_num_rows($result)==0){
@@ -47,6 +51,7 @@ if($confPw != $newPw){
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Edusogno</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
@@ -85,15 +90,17 @@ if($confPw != $newPw){
                         Scegli una nuova password
                     </label>
                     <div class="input-field">
-                      <input type="text" name="new-pw" placeholder="Inserisci una nuova password" id="new-pw" required>
+                      <input type="password" name="new-pw" placeholder="Inserisci una nuova password" id="new-pw" required>
                       <span class="focus-border"></span>
+                      <i class="fa-solid fa-eye-slash" id="toggle-pw"></i>
                     </div>
                     <label for="confirm-pw">
                         Conferma password
                     </label>
                     <div class="input-field">
-                      <input type="text" name="confirm-pw" placeholder="Conferma password" id="confirm-pw" required>
+                      <input type="password" name="confirm-pw" placeholder="Conferma password" id="confirm-pw" required>
                       <span class="focus-border"></span>
+                      <i class="fa-solid fa-eye-slash" id="confirm-toggle-pw"></i>
                     </div>
                    
                     
@@ -110,3 +117,38 @@ if($confPw != $newPw){
 </body>
 
 </html>
+
+<script>
+    $( document ).ready(function() {
+        const togglePassword = document.getElementById('toggle-pw');
+        const password = document.getElementById('new-pw');
+        const confTogglePassword = document.getElementById('confirm-toggle-pw');
+        const confPassword = document.getElementById('confirm-pw');
+
+        togglePassword.addEventListener("click", function () {
+            const type = password.getAttribute("type") === "password" ? "text" : "password";
+            password.setAttribute('type', type);
+
+            if(this.classList.contains('fa-eye-slash')){
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }else{
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            }
+        })
+        confTogglePassword.addEventListener("click", function () {
+            const type = confPassword.getAttribute("type") === "password" ? "text" : "password";
+            confPassword.setAttribute('type', type);
+
+            if(this.classList.contains('fa-eye-slash')){
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }else{
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            }
+        })
+      
+    });
+</script>
