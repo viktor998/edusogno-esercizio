@@ -30,6 +30,8 @@ body{
   overflow: hidden;
 } */
 
+:focus{outline: none;}
+
 /* BACKGROUND */
 
 #vector-4{
@@ -66,7 +68,7 @@ body{
 #rocket{
   position:absolute;
   left:80vw;
-  bottom:7vh;
+  bottom:5.5vh;
 }
 .circle{
   background-color: white;
@@ -170,6 +172,30 @@ h2{
 
 }
 
+.input-field{
+  position:relative;
+}
+
+form input[type="text"]:focus,form input[type="email"]:focus,form input[type="password"]:focus{
+  padding: 5px 14px 7px;
+  transition: 0.4s;
+}
+
+form input[type="text"] ~ .focus-border, form input[type="email"] ~ .focus-border,form input[type="password"] ~ .focus-border{
+  position: absolute;
+  height: 36px;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  transition: 0.4s;
+}
+
+form input[type="text"]:focus ~ .focus-border, form input[type="email"]:focus ~ .focus-border,form input[type="password"]:focus ~ .focus-border{
+  width: 100%;
+  transition: 0.4s;
+  border: 2px solid var(--darkercane);
+}
+
 .form-container form label{
   font-size: 13px;
   display:block;
@@ -183,7 +209,7 @@ h2{
   color:var(--darkestblue);
   font-size: 13px;
   line-height: 99.5%;
-  margin:30px auto 20px;
+  margin:2px auto 20px;
 }
 
 .events-container{
@@ -191,7 +217,6 @@ h2{
   align-items: center;
   justify-content: space-between;
   width:70%;
-  margin:0 auto;
   margin-top:30px;
 }
 
@@ -201,12 +226,19 @@ h2{
   border-radius: 19px;
   color:#ccc;
   padding:18px;
+  margin:10px 30px;
 
 }
 
 .events-container .card h4{
  color:var(--almostblack);
 
+}
+
+p.no-events{
+  color:#555;
+  text-align: center;
+  margin:0 auto;
 }
 
 .logout{
@@ -222,4 +254,36 @@ h2{
   color:var(--electricblue);
   background-color: white;
 }
+
+div.forgot-pw{
+  display:flex;
+  justify-content: start;
+}
+
+div.forgot-pw a{
+  color:var(--electricblue);
+  text-decoration: none;
+  transition: all .3s ease-in-out;
+  font-size:12px;
+}
+
+div.forgot-pw a:hover{
+  color:var(--navy);
+  text-decoration: underline;
+}
+
+
+/* EYE - ICON */
+
+i.fa-solid.fa-eye-slash{
+  color:#666;
+  position:absolute;
+}
+
+i.fa-solid.fa-eye{
+  color:var(--electricblue);
+  position:absolute;
+}
+
+
 

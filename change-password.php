@@ -1,48 +1,32 @@
 <?php
 session_start();
+  include("connection.php");
+  include("functions.php");
 
-    include("connection.php");
-    include("functions.php");
+$newPw=$_POST['new-pw'];
+$confPw=$_POST['conf-pw'];
+$usermail=$_POST['usermail'];
 
+$sql = "SELECT * FROM utenti WHERE email='$usermail' LIMIT 1";
+$result= mysqli_query($conn, $sql);
 
-    if($_SERVER['REQUEST_METHOD']==="POST"){
-        
-        $useremail=$_POST['useremail'];
-        $userpassword=$_POST['userpassword'];
+if($confPw != $newPw){
+  $_SESSION['alert']="Le password devono coincidere";
+}else{
+  $query="UPDATE password FROM utenti SET password='$confPw' WHERE email='$usermail'";
+  $res= mysqli_query($conn, $query);
+  if($res && mysqli_num_rows($res)>0){
+    $_SESSION['alert']="Password aggiornata correttamente";
+    header("Location: login.php");
+    die();
+  }
+}
 
-        if(!empty($useremail) && !empty($userpassword)){
-
-            $sql = "SELECT * FROM utenti WHERE email='$useremail' AND password='$userpassword' LIMIT 1";
-            
-            $result= mysqli_query($conn, $sql);
-
-            if($result && mysqli_num_rows($result)>0){
-                $user_data = mysqli_fetch_assoc($result);
-                if($user_data['password']===$userpassword){
-                    $_SESSION['id']=$user_data['id'];
-                    header("Location:index.php");
-                    die();
-                }
-              }else{
-                  $_SESSION['feedback'] = "E-mail o password non corretta. Riprovare.";
-              }
-
-            header("Location:login.php");
-            die();
-
-
-
-        }else{
-            echo 'Inserire i dati nel formato corretto';
-        }
-
-    }
-
-
-
-
-   
-session_destroy();
+// }
+// elseif(!$result || mysqli_num_rows($result)==0){
+//   $_SESSION['alert']="Questa e-mail non è presente nei nostri sistemi";
+//   header("Location: register.php");
+//   die();
 
 ?>
 
@@ -84,33 +68,39 @@ session_destroy();
     <main>
         <div class="container">
             <h2>
-                Hai già un account?
+                Modifica password
             </h2>
             <div class="form-container">
+
                 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
                     <label for="email">
-                        Inserisci l'e-mail
+                        Inserisci la tua e-mail
                     </label>
                     <div class="input-field">
-                        <input type="email" name="useremail" placeholder="name@example.com" id="email" required>
-                        <span class="focus-border"></span>
+                      <input type="email" name="usermail" placeholder="name@example.com" id="email" required>
+                      <span class="focus-border"></span>
                     </div>
-                    <label for="password">
-                        Inserisci la password
+                   
+                    <label for="new-pw">
+                        Scegli una nuova password
                     </label>
                     <div class="input-field">
-                        <input type="password" name="userpassword" placeholder="Scrivila qui" id="password" required>
-                        <span class="focus-border"></span>
-                        <i class="fa-solid fa-eye-slash"></i>
-                        <i class="fa-solid fa-eye"></i>
-                    </div>            
-                    <div class="forgot-pw">
-                        <a href="request-password.php" class="forgot-pw">Password dimenticata</a>
+                      <input type="text" name="new-pw" placeholder="Inserisci una nuova password" id="new-pw" required>
+                      <span class="focus-border"></span>
                     </div>
+                    <label for="confirm-pw">
+                        Conferma password
+                    </label>
+                    <div class="input-field">
+                      <input type="text" name="confirm-pw" placeholder="Conferma password" id="confirm-pw" required>
+                      <span class="focus-border"></span>
+                    </div>
+                   
                     
-                    <input type="submit" id="button-l" value="ACCEDI">
-                    <?php if($_SESSION['feedback']):?>
-                        <p style="color:red"><?php echo $_SESSION['feedback'] ;?></p>
+                    
+                    <input type="submit" id="button-l" value="CONFERMA NUOVA PASSWORD">
+                    <?php if($_SESSION['alert']):?>
+                        <p style="color:red"><?php echo $_SESSION['alert'] ;?></p>
                     <?php endif ;?>
                 </form>
                 <p>Non hai ancora un profilo? <strong><a href="register.php">Registrati</a></strong></p>

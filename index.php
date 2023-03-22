@@ -17,10 +17,12 @@
         //     echo 'errore';
         // }
     
-    $query= "SELECT * FROM eventi ";
+    // $query= "SELECT * FROM eventi";
+    $usermail=$user_data['email'];
+    $query= "SELECT * FROM eventi WHERE attendees LIKE '%$usermail%'";
     $return=mysqli_query($conn, $query);
     $events=mysqli_fetch_all($return);
-    // dump($events);
+    // dump($user_data['email']);
 
 
 ?>
@@ -63,18 +65,24 @@
     </header>
     <main>
         <div class="container">
-        <h2>
-           Ciao <?php echo strtoupper($user_data['nome']) ;?> ecco i tuoi eventi
-        </h2>
-        <div class="events-container">
-        <?php foreach($events as $event) : ?>
-            <div class="card">
-                <h4><?php echo $event[2];?></h4>
-                <p><?php echo $event[3];?></p>
-                <button class="join-btn">JOIN</button>
-            </div>
-        <?php endforeach; ?>
-        </div>
+            
+            <h2>
+            Ciao <?php echo strtoupper($user_data['nome']) ;?>&nbsp;<?php echo strtoupper($user_data['cognome']) ;?> ecco i tuoi eventi
+            </h2>
+            
+                <div class="events-container">
+                    <?php if($events) :?>
+                        <?php foreach($events as $event) : ?>
+                            <div class="card">
+                                <h4><?php echo $event[2];?></h4>
+                                <p><?php echo $event[3];?></p>
+                                <button class="join-btn">JOIN</button>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else :?>
+                        <p class="no-events">Nessun evento in programma</p>
+                    <?php endif ;?>
+                </div>
         </div>
     </main>
 </body>

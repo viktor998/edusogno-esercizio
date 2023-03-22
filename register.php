@@ -87,19 +87,31 @@ session_start();
                     <label for="nome">
                         Inserisci il nome
                     </label>
-                    <input type="text" name="nome" placeholder="Mario" id="nome" required>
+                    <div class="input-field">
+                        <input type="text" name="nome" placeholder="Mario" id="nome" required>
+                        <span class="focus-border"></span>
+                    </div>
                     <label for="cognome">
                         Inserisci il cognome
                     </label>
-                    <input type="text" name="cognome" placeholder="Rossi" id="cognome" required>
+                    <div class="input-field">
+                        <input type="text" name="cognome" placeholder="Rossi" id="cognome" required>
+                        <span class="focus-border"></span>
+                    </div>
                     <label for="email">
                         Inserisci l'email
                     </label>
-                    <input type="email" name="email" placeholder="name@example.com" id="email" required>
-                    <label for="password">
-                        Inserisci la password
-                    </label>
-                    <input type="password" name="password" placeholder="Scrivila qui" id="password" required>
+                    <div class="input-field">
+                        <input type="email" name="email" placeholder="name@example.com" id="email" required>
+                        <span class="focus-border"></span>
+                    </div>
+                     <label for="password">
+                         Inserisci la password
+                     </label>
+                    <div class="input-field">
+                        <input type="password" name="password" placeholder="Scrivila qui" id="password" pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                        <span class="focus-border"></span>
+                    </div>
                     <input type="submit" value="REGISTRATI" id="button-r">
                 </form>
                 <p>Hai gi&agrave; un account? <strong><a href="login.php">Accedi</a></strong></p>
