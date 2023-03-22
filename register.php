@@ -4,6 +4,37 @@ session_start();
     include("connection.php");
     include("functions.php");
 
+    // if($_SERVER['REQUEST_METHOD']==="POST"){
+    //     $nome=$_POST['nome'];
+    //     $cognome=$_POST['cognome'];
+    //     $email=$_POST['email'];
+    //     $password=$_POST['password'];
+
+
+    //     $readValue = "SELECT `email` FROM utenti WHERE email='$email'";
+
+    //     $res= mysqli_query($conn, $readValue);
+    //     if($res && mysqli_num_rows($res)>0){
+    //         header("Location:login.php");
+    //         die();
+    //     }else{
+    //         if(!empty($nome)&& !empty($cognome) && !empty($email) && !empty($password) && !is_numeric($nome) && !is_numeric($cognome)){
+
+    //             $sql = "INSERT INTO utenti (nome, cognome, email, password) VALUES
+    //             ('$nome', '$cognome','$email','$password')";
+    //             mysqli_query($conn, $sql);
+    
+    //             header("Location:index.php");
+    //             die();
+    //         }else{
+    //             echo 'Inserire i dati nel formato corretto';
+    //         }
+    //     }
+
+        
+
+    // }
+
     if($_SERVER['REQUEST_METHOD']==="POST"){
         $nome=$_POST['nome'];
         $cognome=$_POST['cognome'];
@@ -14,29 +45,14 @@ session_start();
         $readValue = "SELECT `email` FROM utenti WHERE email='$email'";
 
         $res= mysqli_query($conn, $readValue);
-        if($res && mysqli_num_rows($res)>0){
-            var_dump('utente già inserito');
-            header("Location:login.php");
+
+        if((mysqli_num_rows($res)==0) && (!empty($nome)&& !empty($cognome) && !empty($email) && !empty($password) && !is_numeric($nome) && !is_numeric($cognome))){
+            $sql = "INSERT INTO utenti (nome, cognome, email, password) VALUES('$nome', '$cognome','$email','$password')";
+            mysqli_query($conn, $sql);
+            $_SESSION['new-user']="Nuovo utente registrato correttamente";
+            header("Location:index.php");
             die();
-        }else{
-            if(!empty($nome)&&  !empty($cognome) && !empty($email) && !empty($password) && !is_numeric($nome) && !is_numeric($cognome)){
-
-                $sql = "INSERT INTO utenti (nome, cognome, email, password) VALUES
-                ('$nome', '$cognome','$email','$password')";
-                mysqli_query($conn, $sql);
-    
-                header("Location:index.php");
-                die();
-    
-    
-    
-            }else{
-                echo 'Inserire i dati nel formato corretto';
-            }
         }
-
-        
-
     }
 
 
@@ -82,8 +98,7 @@ session_start();
         <h2>
             Crea il tuo account
         </h2>
-        <div class="form-container">
-            
+        <div class="form-container">            
                 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
                     <label for="nome">
                         Inserisci il nome

@@ -1,36 +1,32 @@
 <?php
+
 session_start();
   include("connection.php");
   include("functions.php");
 
-$newPw=$_POST['new-pw'];
-$confPw=$_POST['conf-pw'];
-$usermail=$_POST['usermail'];
+  $_SESSION['alert']='';
 
-$sql = "SELECT * FROM utenti WHERE email='$usermail' LIMIT 1";
-$result= mysqli_query($conn, $sql);
+  $newPw=$_POST['new-pw'];
+  $confPw=$_POST['confirm-pw'];
+  $usermail=$_POST['usermail'];
 
-if(!$result){
-  $_SESSION['alert']="Questa e-mail non è presente nel nostro database";
-}
-// elseif(!empty($confPw) && !empty($newPw) && $confPw!= $newPw){
-//   $_SESSION['alert']="Le password devono coincidere";
-// }
-//else{
-//   $query="UPDATE password FROM utenti SET password='$confPw' WHERE email='$usermail'";
-//   $res= mysqli_query($conn, $query);
-//   if($res && mysqli_num_rows($res)>0){
-//     $_SESSION['alert']="Password aggiornata correttamente";
-//     header("Location: login.php");
-//     die();
-//   }
-// }
+  $sql = "SELECT * FROM utenti WHERE email='$usermail' LIMIT 1";
+  $result= mysqli_query($conn, $sql);
+  
+  if(isset($usermail) && mysqli_num_rows($result)===0){
+    $_SESSION['alert']="Questa e-mail non è presente nel nostro database";
+  }elseif(!empty($confPw) && !empty($newPw) && $confPw!= $newPw){
+    $_SESSION['alert']="Le password devono coincidere";
+  }elseif($result && mysqli_num_rows($result)>0){
+    $query="UPDATE utenti SET password='$confPw' WHERE email='$usermail'";
+    $res=mysqli_query($conn, $query);
+      if($res){
+        $_SESSION['alert']="Password aggiornata correttamente. Puoi effettuare il login";
+      }    
+  }else{
+    $_SESSION['alert']=''; 
+  }
 
-// }
-// elseif(!$result || mysqli_num_rows($result)==0){
-//   $_SESSION['alert']="Questa e-mail non è presente nei nostri sistemi";
-//   header("Location: register.php");
-//   die();
 
 ?>
 
@@ -71,6 +67,7 @@ if(!$result){
         </nav>
     </header>
     <main>
+
         <div class="container">
             <h2>
                 Modifica password
@@ -78,6 +75,9 @@ if(!$result){
             <div class="form-container">
 
                 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
+                <?php if($_SESSION['alert']):?>
+                        <p style="color:red"><?php echo $_SESSION['alert'] ;?></p>
+                    <?php endif ;?>
                     <label for="email">
                         Inserisci la tua e-mail
                     </label>
@@ -101,16 +101,11 @@ if(!$result){
                       <input type="password" name="confirm-pw" placeholder="Conferma password" id="confirm-pw" required>
                       <span class="focus-border"></span>
                       <i class="fa-solid fa-eye-slash" id="confirm-toggle-pw"></i>
-                    </div>
-                   
-                    
-                    
+                    </div>             
                     <input type="submit" id="button-l" value="CONFERMA NUOVA PASSWORD">
-                    <?php if($_SESSION['alert']):?>
-                        <p style="color:red"><?php echo $_SESSION['alert'] ;?></p>
-                    <?php endif ;?>
+                   
                 </form>
-                <p>Non hai ancora un profilo? <strong><a href="register.php">Registrati</a></strong></p>
+                <p><strong><a href="register.php">Registrati</a></strong> | <strong><a href="login.php">Accedi</a></strong></p>
             </div>
         </div>
     </main>

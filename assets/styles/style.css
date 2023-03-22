@@ -14,11 +14,15 @@
   --almostblack:#231F20;
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 body{
   height:100vh;
   width:100vw;
   background-color: var(--lightblue);
-  overflow: hidden;
+  overflow-x: hidden;
   font-family: 'DM Sans', sans-serif;
 }
 
@@ -99,6 +103,8 @@ header{
   top:0;
   left:0;
   height:100px;
+  z-index:99;
+  overflow:hidden;
   background-color: white;
   border-bottom-left-radius: 13px;
   border-bottom-right-radius: 13px;
@@ -119,10 +125,15 @@ nav{
 
 /* MAIN */
 
+main{
+  padding: 110px 20px 40px;
+  overflow-y:auto;
+}
+
 main .container{
   width:70%;
   margin:0 auto;
-  padding:140px 30px 30px;
+  padding:20px;
   text-align: center;
 
 }
@@ -155,6 +166,7 @@ h2{
   border-bottom:1px solid var(--darkestblue);
   margin:10px 0;
   font-size: 20px;
+  transition: all .3s ease-in-out;
 }
 
 .form-container form input[type="submit"], .join-btn{
@@ -172,14 +184,19 @@ h2{
 
 }
 
+.form-container form input[type="submit"]:hover, .join-btn:hover{
+  cursor:pointer;
+}
+
 .input-field{
   position:relative;
 }
 
-/* form input[type="text"]:focus,form input[type="email"]:focus,form input[type="password"]:focus{
-  padding: 5px 14px 7px;
-  transition: 0.4s;
+form input[type="text"]:focus,form input[type="email"]:focus,form input[type="password"]:focus{
+  border-bottom:1px solid var(--electricblue);
 }
+
+/*
 
 form input[type="text"] ~ .focus-border, form input[type="email"] ~ .focus-border,form input[type="password"] ~ .focus-border{
   position: absolute;
@@ -202,7 +219,7 @@ form input[type="text"]:focus ~ .focus-border, form input[type="email"]:focus ~ 
   text-align: left;
   line-height: 99.5%;
   margin-top:20px;
-  color:var(--darkestblue);
+  color:var(--almostblack);
 }
 
 .form-container p, .form-container p a{
@@ -217,7 +234,7 @@ form input[type="text"]:focus ~ .focus-border, form input[type="email"]:focus ~ 
   align-items: center;
   justify-content: space-between;
   width:70%;
-  margin-top:30px;
+  margin:30px auto;
 }
 
 .events-container .card{
@@ -270,6 +287,17 @@ div.forgot-pw a{
 div.forgot-pw a:hover{
   color:var(--navy);
   text-decoration: underline;
+}
+
+.links{
+  display:flex;
+  justify-content: center;
+  margin:0 auto;
+}
+
+.links *{
+  display:inline-block;
+
 }
 
 

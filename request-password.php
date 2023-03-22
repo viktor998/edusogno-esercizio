@@ -1,35 +1,31 @@
 <?php
-session_start();
 
     include("connection.php");
     include("functions.php");
-
-    $usermail=$_POST['usermail'];
-
-    $sql = "SELECT * FROM utenti WHERE email='$usermail' LIMIT 1";
+    $_SESSION['message']='';
+    $usermailfield=$_POST['usermail'];
+  
+    $sql = "SELECT * FROM utenti WHERE email='$usermailfield' LIMIT 1";
     $result= mysqli_query($conn, $sql);
-
-      if($result && mysqli_num_rows($result)>0){
-        $to = "thepenisonthetable@live.it";
-        // $to = $usermail. ',"thepenisonthetable@live.it"';
+    if(!empty($usermailfield) && mysqli_num_rows($result)==0){
+        
+        $_SESSION['message']="E-mail non presente nel nostro database";
+      
+    }elseif($result && mysqli_num_rows($result)>0){
+        $to = $usermailfield;
         $subject = "Reimposta la tua password";
-        $message = "Per modificare la tua password, vai alla pagina ". $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/edusogno-esercizio/change-password.php';
+        $message = "Per modificare la tua password, vai alla pagina ". $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST']."/edusogno-esercizio/change-password.php";
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-    
-        // $headers .= 'From: admin.esercizio@edusogno.com' . "\r\n";
-        $headers .= "From: thepenisonthetable@live.it";
+        $headers .= "From: Deb.provaedusogno@mail.com";
 
 
         mail($to, $subject, $message, $headers);
 
         $_SESSION['message']="Abbiamo inviato una e-mail al tuo indirizzo per il recupero della password"; 
-      }elseif(!isset($usermail)){
-        $_SESSION['message']="Inserire una e-mail valida";
-      }else{
-            $_SESSION['message']="E-mail non presente nel nostro database";
-          
-      }
+    }else{
+        $_SESSION['message']='';
+    }
 
 
 ?>
@@ -87,12 +83,17 @@ session_start();
                     <div class="input-field">
                         <input type="email" name="usermail" placeholder="name@example.com" id="email" required>
                         <span class="focus-border"></span>
+                       
                     </div>                    
                     <input type="submit" id="button-l" value="RICHIEDI NUOVA PASSWORD">
                     
-                    <p>Se non hai ricevuto la mail vai a <a href="change-password.php">questo link</a> </p>
+                    
                 </form>
-                <p>Non hai ancora un profilo? <strong><a href="register.php">Registrati</a></strong></p>
+                <div class="links">
+                    <p>Se non hai ricevuto la mail vai a <strong><a href="change-password.php">questo link</a></strong> </p>&nbsp;|&nbsp;
+                    <p>Non hai ancora un profilo? <strong><a href="register.php">Registrati</a></strong></p>
+                </div>
+                
             </div>
         </div>
     </main>

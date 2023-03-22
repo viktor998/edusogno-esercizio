@@ -3,7 +3,11 @@ session_start();
 
     include("connection.php");
     include("functions.php");
-
+    if($_SESSION['new-user']){
+        $_SESSION['new-user']=$_SESSION['new-user'];
+    }else{
+        $_SESSION['new-user'] = '';
+    }
 
     if($_SERVER['REQUEST_METHOD']==="POST"){
         
@@ -23,9 +27,9 @@ session_start();
                     header("Location:index.php");
                     die();
                 }
-              }else{
-                  $_SESSION['feedback'] = "E-mail o password non corretta. Riprovare.";
-              }
+            }else{
+                $_SESSION['feedback'] = "E-mail o password non corretta. Riprovare.";
+            }
             header("Location:login.php");
             die();
         }else{
@@ -33,8 +37,8 @@ session_start();
         }
 
     }
- 
-// session_destroy();
+
+session_destroy();
 
 ?>
 
@@ -80,6 +84,12 @@ session_start();
                 Hai già un account?
             </h2>
             <div class="form-container">
+                <?php if($_SESSION['new-user']): ?>
+                    <p style="color:red"><?php echo $_SESSION['new-user'] ;?></p>
+                <?php endif;?>
+                <?php if($_SESSION['feedback']):?>
+                        <p style="color:red"><?php echo $_SESSION['feedback'] ;?></p>
+                    <?php endif ;?>
                 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
                     <label for="email">
                         Inserisci l'e-mail
@@ -98,13 +108,11 @@ session_start();
                         <!-- <i class="fa-solid fa-eye"></i> -->
                     </div>            
                     <div class="forgot-pw">
-                        <a href="request-password.php" class="forgot-pw">Password dimenticata</a>
+                        <a href="request-password.php" class="forgot-pw">Password dimenticata?</a>
                     </div>
                     
                     <input type="submit" id="button-l" value="ACCEDI">
-                    <?php if($_SESSION['feedback']):?>
-                        <p style="color:red"><?php echo $_SESSION['feedback'] ;?></p>
-                    <?php endif ;?>
+                    
                 </form>
                 <p>Non hai ancora un profilo? <strong><a href="register.php">Registrati</a></strong></p>
             </div>
@@ -130,6 +138,7 @@ session_start();
                 this.classList.add('fa-eye-slash');
             }
         })
+
       
     });
 </script>
