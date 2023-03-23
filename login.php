@@ -105,10 +105,9 @@ session_destroy();
                         <input type="password" name="userpassword" placeholder="Scrivila qui" id="password" required>
                         <span class="focus-border"></span>
                         <i class="fa-solid fa-eye-slash" id="toggle-pw"></i>
-                        <!-- <i class="fa-solid fa-eye"></i> -->
                     </div>            
                     <div class="forgot-pw">
-                        <a href="request-password.php" class="forgot-pw">Password dimenticata?</a>
+                        <a href="reset-password.php" class="forgot-pw">Password dimenticata?</a>
                     </div>
                     
                     <input type="submit" id="button-l" value="ACCEDI">

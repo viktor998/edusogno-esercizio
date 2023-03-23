@@ -13,7 +13,6 @@ use PHPMailer\PHPMailer\Exception;
 include("connection.php");
 include("functions.php");
 require 'vendor/autoload.php';
-var_dump($usermailfield);
 
 $_SESSION['message']='';
 if($_SERVER['REQUEST_METHOD']==="POST"){
@@ -53,15 +52,17 @@ if(!empty($usermailfield) && mysqli_num_rows($result)==0){
        
         $mail->isHTML(true);                                 
         $mail->Subject = 'Ripristina la tua password';
-        $mail->Body    = '<h6>Gentile '.$user_info['nome']. ',</h6>';
-        $mail->AltBody = 'Per ripristinare una nuova password vai all\'indirizzo'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/edusogno-esercizio/change-password.php';
+        $mail->Body    = '<h3>Gentile '.$user_info['nome']. ',</h3><br><p>Puoi ripristinare una nuova password&nbsp;<a href="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/edusogno-esercizio/change-password.php">a questo indirizzo</a></p><br>';
+        $mail->AltBody = 'Gentile '.$user_info['nome'].', per ripristinare una nuova password vai all\'indirizzo '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/edusogno-esercizio/change-password.php';
     
         $mail->send();
         echo 'Message has been sent';
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
-}
+}else{
+      $_SESSION['message']='';
+   }
 
 
 

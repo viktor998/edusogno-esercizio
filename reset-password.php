@@ -1,9 +1,5 @@
 <?php
-
-if (is_file('../debugger.php')) {
-    include '../debugger.php';
-  }
-
+session_start();
 // UTILIZZO DI PHPMAILER E MAILTRAP
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -14,12 +10,9 @@ include("connection.php");
 include("functions.php");
 require 'vendor/autoload.php';
 
-
 $_SESSION['message']='';
 if($_SERVER['REQUEST_METHOD']==="POST"){
     $usermailfield=$_POST['usermailfield'];}
-;
-
 
 $sql = "SELECT * FROM utenti WHERE email='$usermailfield' LIMIT 1";
 $result= mysqli_query($conn, $sql);
@@ -54,49 +47,20 @@ if(!empty($usermailfield) && mysqli_num_rows($result)==0){
        
         $mail->isHTML(true);                                 
         $mail->Subject = 'Ripristina la tua password';
-        $mail->Body    = '<h6>Gentile '.$user_info['nome']. ',</h6>';
-        $mail->AltBody = 'Per ripristinare una nuova password vai all\'indirizzo'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/edusogno-esercizio/change-password.php';
+        $mail->Body    = '<h3>Gentile '.ucfirst($user_info['nome']). ',</h3><br><p>Puoi ripristinare una nuova password&nbsp;<a href="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/edusogno-esercizio/change-password.php">a questo indirizzo</a>.</p><br>';
+        $mail->AltBody = 'Gentile '.ucfirst($user_info['nome']).', per ripristinare una nuova password vai all\'indirizzo '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/edusogno-esercizio/change-password.php';
     
         $mail->send();
         echo 'Message has been sent';
+        $_SESSION['message']="Abbiamo inviato una e-mail al tuo indirizzo per il recupero della password"; 
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
-}
-
-
-
-    
-    // $_SESSION['message']='';
-    // $usermailfield=$_POST['usermail'];
-  
-    // $sql = "SELECT * FROM utenti WHERE email='$usermailfield' LIMIT 1";
-    // $result= mysqli_query($conn, $sql);
-    // if(!empty($usermailfield) && mysqli_num_rows($result)==0){
-        
-    //     $_SESSION['message']="E-mail non presente nel nostro database";
-      
-    // }elseif($result && mysqli_num_rows($result)>0){
-    //     $to = $usermailfield;
-    //     $subject = "Reimposta la tua password";
-    //     $message = "Per modificare la tua password, vai alla pagina ". $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST']."/edusogno-esercizio/change-password.php";
-    //     $headers = "MIME-Version: 1.0" . "\r\n";
-    //     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-    //     $headers .= "From: Deb.provaedusogno@mail.com";
-
-
-    //     mail($to, $subject, $message, $headers);
-
-    //     $_SESSION['message']="Abbiamo inviato una e-mail al tuo indirizzo per il recupero della password"; 
-    // }else{
-    //     $_SESSION['message']='';
-    // }
-
- 
-
+}else{
+      $_SESSION['message']='';
+   }
 
 ?>
-
 
 
 
@@ -139,8 +103,10 @@ if(!empty($usermailfield) && mysqli_num_rows($result)==0){
                 Modifica password
             </h2>
             <div class="form-container">
-               <form action="prova.php" method="POST">
-               <!-- <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST"> -->
+            <?php if($_SESSION['message']):?>
+                        <p style="color:red"><?php echo $_SESSION['message'] ;?></p>
+                    <?php endif ;?>
+               <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
                     <label for="email">
                         Inserisci la tua e-mail
                     </label>
@@ -153,8 +119,7 @@ if(!empty($usermailfield) && mysqli_num_rows($result)==0){
                     
                 </form>
                 <div class="links">
-                    <p>Se non hai ricevuto la mail vai a <strong><a href="change-password.php">questo link</a></strong> </p>&nbsp;|&nbsp;
-                    <p>Non hai ancora un profilo? <strong><a href="register.php">Registrati</a></strong></p>
+                <p><strong><a href="register.php">Registrati</a></strong> | <strong><a href="login.php">Accedi</a></strong></p>
                 </div>
                 
             </div>
