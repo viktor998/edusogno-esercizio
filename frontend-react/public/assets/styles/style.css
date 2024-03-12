@@ -1,0 +1,313 @@
+/* --------------
+    RESET
+-----------------*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --------------
+    FONT-STYLE
+-----------------*/
+
+body {
+    background-image: url("../img/background.jpg");
+    background-repeat: none;
+    background-size: cover;
+    font-family: 'DM Sans', sans-serif;
+    /* background-color:#D9E5F3; */
+    position: relative;
+    height: 100vh;
+}
+
+/* --------------
+    HEADER
+-----------------*/
+.logo {
+    margin-left: 3.1875rem;
+}
+
+header {
+    height: 10.1875rem;
+    box-shadow: 0px 4px 18px -6px #0057FF;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    justify-content: space-between;
+}
+
+/* --------------
+    MAIN
+-----------------*/
+main {
+    position: relative;
+}
+
+
+.form {
+    padding-top: calc(259px - 205px);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-bottom: 6.25rem;
+
+
+}
+
+.form-title {
+    color: #134077;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 662px;
+    gap: .625rem;
+    background: #FFFFFF;
+    border: 1px solid #134077;
+    border-radius: 19px;
+    padding: 2.875rem 2.3125rem;
+}
+
+label {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    color: #231F20;
+}
+
+input {
+    outline: none;
+    border: none;
+
+}
+
+.input-box {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    border-bottom: 1px solid #2D224C;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: .9375rem;
+    padding: .625rem 0px;
+    gap: 10px;
+}
+
+.password {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: inherit;
+}
+
+#password {
+    width: 100%;
+}
+
+#eye {
+    color: #0057FF;
+    cursor: pointer;
+}
+
+
+.btn {
+    background: #0057FF;
+    border-radius: 11px;
+    height: 3.6875rem;
+    color: white;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+.btn-common {
+    background-color: transparent;
+    padding: 10px 25px;
+    /* border-radius: 11px; */
+    color: black;
+    /* font-style: normal; */
+    /* font-weight: 700; */
+    /* font-size: 20px; */
+    text-transform: uppercase;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    cursor: pointer;
+    /* margin-top:30px ; */
+}
+
+.btn-common:hover {
+    background-color: #cbdaed;
+    color: white;
+}
+
+.account {
+    text-align: center;
+    margin-top: 2.5625rem;
+}
+
+/*----------------
+        EVENTI
+------------------*/
+.event-box {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 67px;
+    ;
+    margin-top: 6.25rem;
+    padding: 0px 3.125rem;
+}
+
+.event-name {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    color: #231F20;
+    line-height: 99.5%;
+}
+
+.event-data {
+    color: #CCCCCC;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.card {
+
+    left: 167px;
+    top: 322px;
+    border: 1px solid #134077;
+    background-color: #FFFFFF;
+    border-radius: 19px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 1.5625rem;
+
+}
+
+/*----------------
+    background
+-----------------*/
+
+.circle-right {
+    position: absolute;
+    width: 181px;
+    height: 181px;
+    right: 41.31px;
+    top: 444px;
+    border-radius: 100%;
+    background: #FFFFFF;
+}
+
+.circle-left {
+    position: absolute;
+    width: 358px;
+    height: 358px;
+    left: -178px;
+    top: 318px;
+    border-radius: 100%;
+
+    background: #FFFFFF;
+}
+
+.admin-table {
+    margin: auto;
+    width: 80%;
+    margin-top: 20px;
+}
+.admin-table h2{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.admin-table table, th, td{
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.admin-table table, td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.admin-table th{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.btn-common-delete{
+    background-color: transparent;
+    padding: 10px 25px;
+    color: black;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.btn-common-delete:hover{
+    background-color: red;
+    color: white;
+}
+
+.btn-common-edit{
+    background-color: transparent;
+    padding: 10px 25px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: black;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.btn-common-edit:hover{
+    background-color: blue;
+    color: white;
+}
+
+.modal-container{
+    text-align: center;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 18px -6px #0057FF;
+    padding: 50px;
+}
+
+.modal-container h2{
+    color: red;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+}
+
+.modal-container input[type=text]{
+    width: 60%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  .modal-container label{
+    text-align: left;
+  }
+
+  .modal-container .btns{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+  }
